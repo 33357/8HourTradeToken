@@ -83,7 +83,10 @@ contract _8HourTradeToken is ERC20Interface, SafeMath {
     }
 
     function nextUntradeTime() public view returns (uint){
-        return safeAdd(safeSub(block.timestamp,safeMod(block.timestamp-startTime,cycleTime)),tradeTime);
+        if(safeMod(block.timestamp-startTime,cycleTime)<tradeTime){
+            return safeAdd(safeSub(block.timestamp,safeMod(block.timestamp-startTime,cycleTime)),tradeTime);
+        }
+        return safeAdd(safeSub(block.timestamp,safeMod(block.timestamp-startTime,cycleTime)),tradeTime+cycleTime);
     }
 
     function isTradeTime() public view returns (bool){
