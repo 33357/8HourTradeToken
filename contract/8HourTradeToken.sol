@@ -56,7 +56,7 @@ contract _8HourTradeToken is ERC20Interface, SafeMath {
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
 
-    uint public startTime;
+    uint public startTime=1614254400;//UTC8+ 2021-02-25 20:00:00
     uint public cycleTime=12*60*60;
     uint public tradeTime=4*60*60;
 
@@ -72,9 +72,8 @@ contract _8HourTradeToken is ERC20Interface, SafeMath {
         symbol = "8H";
         name = "8Hour Trade Token";
         decimals = 18;
-        _totalSupply = 2100*1000000000000000000;
+        _totalSupply = 21000000*1000000000000000000;
         balances[msg.sender] = _totalSupply;
-        startTime=block.timestamp;
         emit Transfer(address(0), msg.sender, _totalSupply);
     }
 
