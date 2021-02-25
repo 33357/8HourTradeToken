@@ -62,7 +62,7 @@ contract _8HourTradeToken is ERC20Interface, SafeMath {
 
 
     modifier onlyTradeTime {
-        require(safeMod(block.timestamp-startTime,cycleTime)<tradeTime,'onlyTradeTime: not trade Time!');
+        require(safeMod(block.timestamp-startTime,cycleTime)<=tradeTime,'onlyTradeTime: not trade Time!');
         _;
     }
     // ------------------------------------------------------------------------
@@ -83,14 +83,14 @@ contract _8HourTradeToken is ERC20Interface, SafeMath {
     }
 
     function nextUntradeTime() public view returns (uint){
-        if(safeMod(block.timestamp-startTime,cycleTime)<tradeTime){
+        if(safeMod(block.timestamp-startTime,cycleTime)<=tradeTime){
             return safeAdd(safeSub(block.timestamp,safeMod(block.timestamp-startTime,cycleTime)),tradeTime);
         }
         return safeAdd(safeSub(block.timestamp,safeMod(block.timestamp-startTime,cycleTime)),tradeTime+cycleTime);
     }
 
     function isTradeTime() public view returns (bool){
-        return safeMod(block.timestamp-startTime,cycleTime)<tradeTime;
+        return safeMod(block.timestamp-startTime,cycleTime)<=tradeTime;
     }
 
     // ------------------------------------------------------------------------
