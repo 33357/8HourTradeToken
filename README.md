@@ -1,1 +1,1 @@
-# 8HourToken
+# 8HourTradeToken
